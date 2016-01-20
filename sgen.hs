@@ -1,7 +1,8 @@
 import SudokuGen
 import SudokuSorted
+import SudokuHelper
 
 main = do
     puzzle <- sudokuGen
-    putStrLn (show puzzle)
-    putStrLn (show $ solveStr puzzle)
+    putStrLn (pretty $ puzzle)
+    putStrLn (pretty $ solveStr puzzle)

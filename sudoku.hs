@@ -1,5 +1,5 @@
 import SudokuSorted
-import SExmpl
+import SudokuHelper
 
 main = do 
     putStrLn $ show $ solveStr sHard

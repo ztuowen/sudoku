@@ -1,4 +1,11 @@
-module SExmpl where
+module SudokuHelper where
+
+prettyPrint l a [] = ""
+prettyPrint l a (x:xs)
+    | a == l = "\n"++(show x)++" " ++ (prettyPrint l 1 xs)
+    | otherwise = (show x)++" "++(prettyPrint l (a+1) xs)
+
+pretty xs = prettyPrint 9 0 xs
 
 sEasy = [3,0,6,5,0,8,4,0,0
          ,5,2,0,0,0,0,0,0,0
