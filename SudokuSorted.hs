@@ -4,15 +4,10 @@ import Data.List
 
 numlist = [1..9]
 
-block pos@(i,j) = [(x+dx,y+dy) |dx<-[0..2],dy<-[0..2]]
-    where x = i - mod i 3
-          y = j - mod j 3
-
-line pos@(i,_) = [(i,dy)| dy <- [0..9]]
-
-col pos@(_,j) = [(dx,j)| dx<-[0..9]]
-
-allp pos = concat [block pos,line pos,col pos]
+allp pos@(i,j) = concat [block,line,col]
+    where block = [(i + dx - mod i 3,j + dy - mod j 3) |dx<-[0..2],dy<-[0..2]]
+          line = [(i,dy)| dy <- [0..9]]
+          col = [(dx,j)| dx<-[0..9]]
 
 get pos all = (map head).group.sort $ [ k | (xy,k)<- all, elem xy $ allp pos ]
 
