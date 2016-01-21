@@ -1,7 +1,6 @@
 module SudokuSorted where
 
 import Data.List
-import SudokuHelper
 
 numlist = [1..9]
 
