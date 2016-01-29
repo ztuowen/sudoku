@@ -1,6 +1,7 @@
-module SudokuSorted where
+module SudokuAmb where
 
 import Data.List
+import Control.Monad
 
 numlist = [1..9]
 
@@ -14,10 +15,12 @@ get pos all = (map head).group.sort $ [ k | (xy,k)<- all, elem xy $ allp pos ]
 refresh pos k all = [ if (not $ elem xy $ allp pos) || elem k ks then (xy,ks) else (xy,k:ks) | (xy,ks) <- all]
 
 solve ([],taken) = [taken]
-solve (empty,taken) = concatMap solve [ (refresh pos i rst,(pos,i):taken) | i<-avail]
+solve (empty,taken) = concat $ do 
+    i<-numlist
+    guard $ (not $ elem i used)
+    return $ solve (refresh pos i rst,(pos,i):taken)
     where (pos,used):rst = sortBy (\a b -> compare (length.snd $ b) (length.snd $ a)) empty
-          avail = [ i |i<-numlist, not $ elem i used]
-          
+
 solveStr :: [Int] -> [Int]
 solveStr = (getout 0). head . solve . fill . (getin 0)
 

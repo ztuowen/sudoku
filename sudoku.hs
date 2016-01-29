@@ -1,4 +1,4 @@
-import SudokuSorted
+import SudokuAmb
 import SudokuHelper
 
 main = do 
